@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>חישוב טיפים באשראי</title>
+    <title>חישוב מעטפות</title>
 </head>
 <body>
 <h1>חישוב טיפים באשראי</h1>
 
 <!-- טופס להזנת המזומן והפרמטרים הנדרשים -->
 <form id="tipForm" onsubmit="calculateTips(); return false;">
-    <label for="cashAmountZad">סכום מזומן לפי זד:</label>
-    <input type="number" id="cashAmountZad" required>
-    <br>
-
     <label for="physicalCash">סכום מזומן פיזי:</label>
     <input type="number" id="physicalCash" required>
+    <br>
+
+    <label for="cashAmountZad">סכום מזומן לפי זד:</label>
+    <input type="number" id="cashAmountZad" required>
     <br>
 
     <label for="creditTipsInCash">סכום טיפים אשראי במזומן:</label>
@@ -41,7 +41,7 @@
         const remainingInCash = parseFloat(document.getElementById('remainingInCash').value);
 
         // חישוב טיפים באשראי
-        let creditTipsTotal = cashAmountZad - physicalCash - creditTipsInCash - remainingInCash;
+        let creditTipsTotal = physicalCash - cashAmountZad - remainingInCash;
 
         // עדכון טיפים באשראי אם הם פחות מ0
         let updatedCreditTips = 0;
@@ -56,13 +56,14 @@
         }
 
         // חישוב סכום מזומן פיזי מעודכן
-        const updatedPhysicalCash = cashAmountZad - updatedCreditTips - remainingInCash;
+        const updatedPhysicalCash = physicalCash - updatedCreditTips - remainingInCash;
 
         // עדכון התוצאות ב-DOM
         const resultsDiv = document.getElementById('results');
         resultsDiv.innerHTML = `
-            <p>סכום מזומן פיזי פחות טיפים באשראי מעודכן לאחר חוסר: ${updatedPhysicalCash}</p>
+            <p>סכום מזומן למעטפה: ${updatedPhysicalCash}</p>
             <p>סכום טיפים אשראי מעודכן: ${updatedCreditTips}</p>
+            <p>חוסר: ${deductedAmount}</p>
         `;
     }
 </script>
