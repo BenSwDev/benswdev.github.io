@@ -41,7 +41,7 @@
         const remainingInCash = parseFloat(document.getElementById('remainingInCash').value);
 
         // חישוב טיפים באשראי
-        let creditTipsTotal = physicalCash - cashAmountZad - remainingInCash;
+        let creditTipsTotal = physicalCash - cashAmountZad;
 
         // עדכון טיפים באשראי אם הם פחות מ0
         let updatedCreditTips = 0;
@@ -62,6 +62,7 @@
         const resultsDiv = document.getElementById('results');
         resultsDiv.innerHTML = `
             <p>סכום מזומן למעטפה: ${updatedPhysicalCash}</p>
+            <p>סכום שנשאר בקופה: ${remainingInCash}</p>
             <p>סכום טיפים אשראי מעודכן: ${updatedCreditTips}</p>
             <p>חוסר: ${deductedAmount}</p>
         `;
